@@ -58,7 +58,7 @@ describe("ProfilePage", () => {
   });
 
   it("should validate and submit update profile", async () => {
-    const errorSpy = vi.spyOn(toolsHelper, "showErrorDialog").mockImplementation(() => {});
+    const errorSpy = vi.spyOn(toolsHelper, "showErrorDialog").mockResolvedValue({} as any);
 
     const { wrapper } = renderWithProviders(ProfilePage, {
       preloadedState: { profile: mockProfile },
@@ -89,7 +89,7 @@ describe("ProfilePage", () => {
   });
 
   it("should validate and upload photo", async () => {
-    const errorSpy = vi.spyOn(toolsHelper, "showErrorDialog").mockImplementation(() => {});
+    const errorSpy = vi.spyOn(toolsHelper, "showErrorDialog").mockResolvedValue({} as any);
 
     const { wrapper } = renderWithProviders(ProfilePage, {
       preloadedState: { profile: mockProfile },
@@ -135,7 +135,7 @@ describe("ProfilePage", () => {
   });
 
   it("should validate and submit password update", async () => {
-    const errorSpy = vi.spyOn(toolsHelper, "showErrorDialog").mockImplementation(() => {});
+    const errorSpy = vi.spyOn(toolsHelper, "showErrorDialog").mockResolvedValue({} as any);
 
     const { wrapper } = renderWithProviders(ProfilePage, {
       preloadedState: { profile: mockProfile },

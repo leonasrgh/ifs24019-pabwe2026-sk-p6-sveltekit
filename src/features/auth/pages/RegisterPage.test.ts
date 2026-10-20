@@ -10,7 +10,7 @@ describe("RegisterPage", () => {
   });
 
   it("should show error when name is empty", async () => {
-    const errorSpy = vi.spyOn(toolsHelper, "showErrorDialog").mockImplementation(() => {});
+    const errorSpy = vi.spyOn(toolsHelper, "showErrorDialog").mockResolvedValue({} as any);
     const { wrapper } = renderWithProviders(RegisterPage);
 
     await wrapper.find("form").trigger("submit");
@@ -18,7 +18,7 @@ describe("RegisterPage", () => {
   });
 
   it("should show error when email is empty", async () => {
-    const errorSpy = vi.spyOn(toolsHelper, "showErrorDialog").mockImplementation(() => {});
+    const errorSpy = vi.spyOn(toolsHelper, "showErrorDialog").mockResolvedValue({} as any);
     const { wrapper } = renderWithProviders(RegisterPage);
 
     await wrapper.find('[data-testid="register-name-input"]').setValue("Abdul");
@@ -27,7 +27,7 @@ describe("RegisterPage", () => {
   });
 
   it("should show error when password is empty", async () => {
-    const errorSpy = vi.spyOn(toolsHelper, "showErrorDialog").mockImplementation(() => {});
+    const errorSpy = vi.spyOn(toolsHelper, "showErrorDialog").mockResolvedValue({} as any);
     const { wrapper } = renderWithProviders(RegisterPage);
 
     await wrapper.find('[data-testid="register-name-input"]').setValue("Abdul");
@@ -37,7 +37,7 @@ describe("RegisterPage", () => {
   });
 
   it("should show error when password confirmation does not match", async () => {
-    const errorSpy = vi.spyOn(toolsHelper, "showErrorDialog").mockImplementation(() => {});
+    const errorSpy = vi.spyOn(toolsHelper, "showErrorDialog").mockResolvedValue({} as any);
     const { wrapper } = renderWithProviders(RegisterPage);
 
     await wrapper.find('[data-testid="register-name-input"]').setValue("Abdul");

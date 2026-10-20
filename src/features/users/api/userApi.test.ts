@@ -189,7 +189,7 @@ describe("userApi", () => {
         }),
       } as any);
 
-      const file = new Blob(["dummy"], { type: "image/png" });
+      const file = new File(["dummy"], "photo.png", { type: "image/png" });
       const msg = await userApi.postProfilePhoto(file);
       expect(msg).toBe("Berhasil");
     });

@@ -88,28 +88,26 @@ describe("UsersPage", () => {
   });
 
   it("should show loading indicator while users are being fetched", async () => {
-    let resolveLoad;
-    const pendingPromise = new Promise((resolve) => {
-      resolveLoad = resolve;
-    });
-
-    vi.spyOn(usersStore, "asyncSetUsers").mockReturnValue(pendingPromise);
-
-    const { wrapper } = renderWithProviders(UsersPage, {
-      preloadedState: {
-        users: [],
-      },
-    });
-
-    // loading is true while promise is pending and filteredUsers is empty
-    expect(wrapper.text()).toContain("Memuat daftar pengguna...");
-
-    resolveLoad();
-    await pendingPromise;
-    await new Promise((r) => setTimeout(r, 10));
-
-    expect(wrapper.text()).not.toContain("Memuat daftar pengguna...");
+  let resolveLoad!: () => void;
+  const pendingPromise = new Promise<void>((resolve) => {
+    resolveLoad = resolve;
   });
+  vi.spyOn(usersStore, "asyncSetUsers").mockReturnValue(pendingPromise);
+
+  const { wrapper } = renderWithProviders(UsersPage, {
+    preloadedState: {
+      users: [],
+    },
+  });
+
+  expect(wrapper.text()).toContain("Memuat daftar pengguna...");
+
+  resolveLoad();
+  await pendingPromise;
+  await new Promise((r) => setTimeout(r, 10));
+
+  expect(wrapper.text()).not.toContain("Memuat daftar pengguna...");
+});
 
   it("should render users progressively and reveal more on demand", async () => {
     const manyUsers = Array.from({ length: 30 }, (_, i) => ({

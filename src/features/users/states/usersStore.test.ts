@@ -111,7 +111,7 @@ describe("usersStore", () => {
       const store = useUsersStore();
       const updated = { id: 1, name: "New Name", email: "new@del.org" } as any;
       vi.spyOn(userApi, "putProfile").mockResolvedValue(updated);
-      const successSpy = vi.spyOn(toolsHelper, "showSuccessDialog").mockImplementation(() => {});
+      const successSpy = vi.spyOn(toolsHelper, "showSuccessDialog").mockResolvedValue({} as any);
 
       await store.asyncPutProfile("New Name", "new@del.org");
 
@@ -123,7 +123,7 @@ describe("usersStore", () => {
     it("should show error dialog and set isChangeProfile to false on error", async () => {
       const store = useUsersStore();
       vi.spyOn(userApi, "putProfile").mockRejectedValue(new Error("Gagal update"));
-      const errorSpy = vi.spyOn(toolsHelper, "showErrorDialog").mockImplementation(() => {});
+      const errorSpy = vi.spyOn(toolsHelper, "showErrorDialog").mockResolvedValue({} as any);
 
       await store.asyncPutProfile("New Name", "new@del.org");
 
@@ -137,7 +137,7 @@ describe("usersStore", () => {
       const store = useUsersStore();
       vi.spyOn(userApi, "postProfilePhoto").mockResolvedValue("Foto profil diubah");
       vi.spyOn(userApi, "getProfile").mockResolvedValue({ id: 1, photo: "new.jpg" } as any);
-      const successSpy = vi.spyOn(toolsHelper, "showSuccessDialog").mockImplementation(() => {});
+      const successSpy = vi.spyOn(toolsHelper, "showSuccessDialog").mockResolvedValue({} as any);
 
       const dummyFile = new File([""], "test.png");
       await store.asyncPostProfilePhoto(dummyFile);
@@ -151,7 +151,7 @@ describe("usersStore", () => {
       const store = useUsersStore();
       vi.spyOn(userApi, "postProfilePhoto").mockResolvedValue("");
       vi.spyOn(userApi, "getProfile").mockResolvedValue({ id: 1 } as any);
-      const successSpy = vi.spyOn(toolsHelper, "showSuccessDialog").mockImplementation(() => {});
+      const successSpy = vi.spyOn(toolsHelper, "showSuccessDialog").mockResolvedValue({} as any);
 
       const dummyFile = new File([""], "test.png");
       await store.asyncPostProfilePhoto(dummyFile);
@@ -162,7 +162,7 @@ describe("usersStore", () => {
     it("should show error dialog and set isChangeProfilePhoto to false on failure", async () => {
       const store = useUsersStore();
       vi.spyOn(userApi, "postProfilePhoto").mockRejectedValue(new Error("File terlalu besar"));
-      const errorSpy = vi.spyOn(toolsHelper, "showErrorDialog").mockImplementation(() => {});
+      const errorSpy = vi.spyOn(toolsHelper, "showErrorDialog").mockResolvedValue({} as any);
 
       const dummyFile = new File([""], "test.png");
       await store.asyncPostProfilePhoto(dummyFile);
@@ -176,7 +176,7 @@ describe("usersStore", () => {
     it("should update password, show success dialog, and set isChangeProfilePassword to true", async () => {
       const store = useUsersStore();
       vi.spyOn(userApi, "putProfilePassword").mockResolvedValue("Password diubah");
-      const successSpy = vi.spyOn(toolsHelper, "showSuccessDialog").mockImplementation(() => {});
+      const successSpy = vi.spyOn(toolsHelper, "showSuccessDialog").mockResolvedValue({} as any);
 
       await store.asyncPutProfilePassword("old", "new", "new");
 
@@ -187,7 +187,7 @@ describe("usersStore", () => {
     it("should use fallback message if server message empty", async () => {
       const store = useUsersStore();
       vi.spyOn(userApi, "putProfilePassword").mockResolvedValue("");
-      const successSpy = vi.spyOn(toolsHelper, "showSuccessDialog").mockImplementation(() => {});
+      const successSpy = vi.spyOn(toolsHelper, "showSuccessDialog").mockResolvedValue({} as any);
 
       await store.asyncPutProfilePassword("old", "new", "new");
 
@@ -197,7 +197,7 @@ describe("usersStore", () => {
     it("should show error dialog and set isChangeProfilePassword to false on failure", async () => {
       const store = useUsersStore();
       vi.spyOn(userApi, "putProfilePassword").mockRejectedValue(new Error("Password salah"));
-      const errorSpy = vi.spyOn(toolsHelper, "showErrorDialog").mockImplementation(() => {});
+      const errorSpy = vi.spyOn(toolsHelper, "showErrorDialog").mockResolvedValue({} as any);
 
       await store.asyncPutProfilePassword("old", "new", "new");
 

@@ -44,7 +44,7 @@ describe("authStore", () => {
     it("should set isAuthLogin to false and show error on failure", async () => {
       const store = useAuthStore();
       vi.spyOn(authApi, "postLogin").mockRejectedValue(new Error("Login gagal"));
-      const errorSpy = vi.spyOn(toolsHelper, "showErrorDialog").mockImplementation(() => {});
+      const errorSpy = vi.spyOn(toolsHelper, "showErrorDialog").mockResolvedValue({} as any);
 
       await store.asyncSetIsAuthLogin("email@del.org", "wrong");
 
@@ -57,7 +57,7 @@ describe("authStore", () => {
     it("should set isAuthRegister to true and show success dialog on success", async () => {
       const store = useAuthStore();
       vi.spyOn(authApi, "postRegister").mockResolvedValue("Registrasi Berhasil");
-      const successSpy = vi.spyOn(toolsHelper, "showSuccessDialog").mockImplementation(() => {});
+      const successSpy = vi.spyOn(toolsHelper, "showSuccessDialog").mockResolvedValue({} as any);
 
       await store.asyncSetIsAuthRegister("Name", "name@del.org", "pass");
 
@@ -68,7 +68,7 @@ describe("authStore", () => {
     it("should set isAuthRegister to false and show error dialog on failure", async () => {
       const store = useAuthStore();
       vi.spyOn(authApi, "postRegister").mockRejectedValue(new Error("Email sudah terdaftar"));
-      const errorSpy = vi.spyOn(toolsHelper, "showErrorDialog").mockImplementation(() => {});
+      const errorSpy = vi.spyOn(toolsHelper, "showErrorDialog").mockResolvedValue({} as any);
 
       await store.asyncSetIsAuthRegister("Name", "name@del.org", "pass");
 
